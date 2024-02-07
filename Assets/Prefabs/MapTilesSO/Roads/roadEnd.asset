@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1974ef27c0df36241ab27377c2230c8c, type: 3}
+  m_Name: roadEnd
+  m_EditorClassIdentifier: 
+  tilePrefab:
+  - {fileID: 8209781866870591696, guid: d7cd91eb0e067d246bb773233e895f11, type: 3}
+  tileType: 2
+  rotation: {x: 0, y: 0, z: 0, w: 0}
+  tileName: RoadEnd
+  rotationIdentifier: 0
+  identifierDirections: 02000000

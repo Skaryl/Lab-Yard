@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68a280864aea5b74ab5a5c4916690072, type: 3}
+  m_Name: RoboLabs
+  m_EditorClassIdentifier: 
+  name: RoboLabs
+  description: This is the starting company. The Player will be employed in this
+    when starting a new game.
+  branches:
+  - type: 0
+    commonlyKnown: 1
+    reputation: 25
+  - type: 2
+    commonlyKnown: 1
+    reputation: 40
+  - type: 1
+    commonlyKnown: 1
+    reputation: 25
+  - type: 10
+    commonlyKnown: 0
+    reputation: 0

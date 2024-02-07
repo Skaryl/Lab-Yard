@@ -1,0 +1,16 @@
+public enum BiomeType {
+    Commerial,
+    Industrial,
+    Residential,
+    Urban,
+    Water,
+    Mountain,
+    Desert,
+    Arctic,
+    Lake,
+    Ocean,
+    River,
+    Forest,
+    Grassland,
+    Hill,
+}

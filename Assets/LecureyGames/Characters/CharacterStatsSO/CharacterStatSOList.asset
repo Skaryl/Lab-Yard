@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0fbe58fd94137e4dbfcb50353d7b2ce, type: 3}
+  m_Name: CharacterStatSOList
+  m_EditorClassIdentifier: 
+  characterStats:
+  - {fileID: 11400000, guid: 6179a60f4a7234745bf0e895f91ebacf, type: 2}
+  - {fileID: 11400000, guid: 0c5362ba9d28f1e4a940eb4d66430694, type: 2}
+  - {fileID: 11400000, guid: 2d971a99b8c67c44bb5a9fffb08cfe55, type: 2}
+  - {fileID: 11400000, guid: 73538fd5e9116fd42b971ad40e424b78, type: 2}
+  - {fileID: 11400000, guid: 1fa80544bf3d6eb4e891924b3c32a0bb, type: 2}
