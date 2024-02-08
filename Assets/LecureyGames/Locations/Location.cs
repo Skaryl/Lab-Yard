@@ -4,76 +4,47 @@ using UnityEngine;
 
 namespace LecureyGames {
     [Serializable]
-    public class Location : MonoBehaviour {
-        [SerializeField] protected new string name = "Unnamed Location";
-        [SerializeField] protected string address = "Unknown";
-        [SerializeField] protected string description = "No description";
-        [SerializeField] protected LocationType type = LocationType.RoboticsWorkshop;
-        [SerializeField] protected List<string> ownerNamesCharacters;
-        [SerializeField] protected List<string> ownerNamesCompanies;
+    public class Location {
+        [SerializeField] protected string locationName;
+        protected string locationAddress;
+        protected string locationDescription;
+        protected LocationType locationType;
+        [SerializeField] protected List<Floor> floors;
 
-        public string Name { get => name; protected set => name = value; }
-        public string Address { get => address; protected set => address = value; }
-        public string Description { get => description; protected set => description = value; }
-        public LocationType Type { get => type; protected set => type = value; }
-        public List<IOwner> Owners { get; protected set; }
-        public List<Floor> Floors { get; protected set; }
-        public List<Company> LocatedCompanies { get; protected set; }
-        public LocationSO LocationSO { get; protected set; }
-        public Location() {
-        }
+        protected List<IOwner> owners;
+        protected List<string> ownerNamesCharacters;
+        protected List<string> ownerNamesCompanies;
+        protected List<Company> locatedCompanies;
 
-        public void SetValuesFromSO(LocationSO locationSO, Transform world) {
-            transform.parent = world;
-            LocationSO = locationSO;
-            Name = locationSO.locationName;
-            transform.position = locationSO.position;
-            Address = locationSO.position.ToString();
-            Description = "No description";
-            Type = locationSO.locationType;
-            InitializeOwners();
-            InitializeFloors(locationSO.buildingDimension);
+        public string LocationName { get => locationName; protected set => locationName = value; }
+        public string LocationAddress { get => locationAddress; protected set => locationAddress = value; }
+        public string LocationDescription { get => locationDescription; protected set => locationDescription = value; }
+        public LocationType LocationType { get => locationType; protected set => locationType = value; }
+        public List<IOwner> Owners { get => owners; protected set => owners = value; }
+        public List<Floor> Floors { get => floors; protected set => floors = value; }
+        public List<Company> LocatedCompanies { get => locatedCompanies; protected set => locatedCompanies = value; }
+
+        public Location(LocationSO locationSO) {
+            LocationName = locationSO.LocationName;
+            LocationAddress = $"{locationSO.Placement}"; // TODO: implement GetAdress after RoadGeneration is implemented
+            LocationDescription = locationSO.Description;
+            LocationType = locationSO.LocationType;
+            Owners = new();
+            Floors = new();
+            LocatedCompanies = new();
+            InitializeFloors(locationSO.BuildingDimension);
         }
 
         private void InitializeFloors(BuildingDimensions buildingDimensions) {
-            Floors = new() {
-                new(0, buildingDimensions, this)
-            };
-            if (buildingDimensions.FloorCount > 0)
-                for (int i = 1; i <= buildingDimensions.FloorCount; i++) {
-                    Floors.Add(new(i, buildingDimensions, this));
-                }
-            if (buildingDimensions.BasementCount > 0)
-                for (int i = 1; i <= buildingDimensions.BasementCount; i++) {
-                    Floors.Add(new(-i, buildingDimensions, this));
-                }
-        }
+            int floorCount = buildingDimensions.FloorCount;
+            int basementCount = buildingDimensions.BasementCount;
+            int roomsPerFloor = buildingDimensions.RoomsPerFloor;
 
-        private void InitializeOwners(List<IOwner> owners = null) {
-            Owners = new();
-            if (owners == null)
-                return;
-            foreach (var owner in owners) {
-                Owners.Add(owner);
-            }
-        }
+            Debug.Log($"{LocationName}: Floor Count: {floorCount}, Basement Count: {basementCount}, Total: {floorCount + basementCount + 1}, Rooms Per Floor: {roomsPerFloor}");
 
-        public List<string> GetOwnerNamesCharacters() {
-            List<string> names = new();
-            foreach (IOwner owner in Owners) {
-                if (owner is Character)
-                    names.Add(owner.Name);
+            for (int levelNumber = -basementCount; levelNumber <= floorCount; levelNumber++) {
+                Floors.Add(new(levelNumber, roomsPerFloor, true));
             }
-            return names;
-        }
-
-        public List<string> GetOwnerNamesCompanies() {
-            List<string> names = new();
-            foreach (IOwner owner in Owners) {
-                if (owner is Company)
-                    names.Add(owner.Name);
-            }
-            return names;
         }
     }
 }

@@ -12,19 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2facf3215cd3cf7448097e9f6829a7c4, type: 3}
   m_Name: TestShoppingMall
   m_EditorClassIdentifier: 
-  locationName: ShoppingMall
-  locationType: 15
-  position: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 0.38268346, z: 0, w: 0.9238795}
+  minAmountInWorld: 0
+  locationName: Shopping Mall
+  description: A big shopping mall.
+  locationType: 0
   buildingDimension:
-    xDimension: 70
-    zDimension: 110
+    floorCount: 3
+    basementCount: 2
+    roomsPerFloor: 30
+    xDimension: 130
+    zDimension: 60
     roomHeight: 4.78
-    floorCount: 2
-    basementCount: 1
     wallThickness: 0.63
     floorThickness: 0.6
     roofThickness: 0.4
-    roomsPerFloor: 30
-  simpleVisualisationMaterial: {fileID: 2100000, guid: 1a18c91a206581a4e8a7ce091b682a98,
-    type: 2}
+  placement:
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
+  colliderBoxMaterial: {fileID: 2100000, guid: 0326ffa2d810533418e619719b2a1ea3, type: 2}

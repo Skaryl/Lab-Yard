@@ -4,85 +4,91 @@ using UnityEngine;
 
 namespace LecureyGames {
     public class LocationManager : MonoBehaviour {
-        public static LocationManager Instance { get; private set; }
+        public static LocationManager Instance { get; protected set; }
 
-        [SerializeField] private bool useRandomLocations = true;
-        [SerializeField, PositiveInt] private int minNumberOfLocations;
-        [SerializeField, PositiveInt] private int maxNumberOfLocation;
+        [SerializeField, PositiveInt] protected int minNumberOfLocations;
+        [SerializeField, PositiveInt] protected int maxNumberOfLocation;
 
-        [SerializeField] private List<LocationSO> usedLocations;
-        [SerializeField] private List<Location> locationsInWorld;
+        [SerializeField] protected List<LocationSO> locationsToUse;
+        [SerializeField] protected List<Location> locationsInWorld;
 
-        private Dictionary<Location, GameObject> locationObjects;
+        protected Dictionary<Location, GameObject> locationObjects;
+        //protected Dictionary<Location, LocationSO> locationsToVisualize;
 
-        public List<LocationSO> UsedLocations => usedLocations;
-
-
-        private Transform world;
-
-        private void Awake() {
+        protected void Awake() {
             if (Instance != null && Instance != this) {
                 Destroy(this);
                 return;
             }
             Instance = this;
+
+            locationsToUse ??= new();
+            locationsInWorld ??= new();
+            locationObjects ??= new();
+            //locationsToVisualize ??= new();
         }
 
-        public void InitializeLocations(Transform world) {
-            this.world = world;
+        public void InitializeLocations() {
+            locationsInWorld ??= new();
+            locationObjects ??= new();
             Statistics.MeasureTime(GenerateLocations);
-            Statistics.MeasureTime(VisualizeLocations);
+            //Statistics.MeasureTime(GenerateLocations);
+            //Statistics.MeasureTime(VisualizeLocations);
         }
 
-        public void GenerateLocations() {
-            Debug.Log("Generating Locations...");
-            locationsInWorld = new();
-            if (useRandomLocations) {
-                CreateRandomLocationsFromSO();
-            } else
-                foreach (LocationSO usedLocation in usedLocations) {
-                    CreateLocationFromSO(usedLocation, world);
-                }
-        }
-
-        private void CreateRandomLocationsFromSO() {
-            for (int i = 0; i < Random.Range(minNumberOfLocations, maxNumberOfLocation); i++) {
-                CreateLocationFromSO(usedLocations[Random.Range(0, usedLocations.Count)], world);
-            }
-        }
-
-        private Vector3 GetRandomWorldPosition(Vector3 centerPoint = default) {
-            if (centerPoint == default) {
-                return Vector3.zero;
-            }
-            return new Vector3(Random.Range(-100f, 100f) + centerPoint.x, 0f, Random.Range(-100f, 100f) + centerPoint.z);
-        }
-
-        public void VisualizeLocations() {
-            Debug.Log("Visualizing Locations...");
-            locationObjects = new();
-            if (locationsInWorld == null || locationsInWorld.Count == 0)
+        protected void GenerateLocations() {
+            if (locationsToUse == null || locationsToUse.Count == 0) {
+                Debug.Log("No locations to generate");
                 return;
-            foreach (Location location in locationsInWorld) {
-                GameObject locationObject = LocationVisualizer.Visualize(location);
+            }
+            Debug.Log("Generating Locations...");
+
+            for (int i = 0; i < Random.Range(minNumberOfLocations, maxNumberOfLocation); i++) {
+                LocationSO locationSO = locationsToUse[Random.Range(0, locationsToUse.Count)];
+                Debug.Log($"{locationSO.LocationName} {i} {locationSO.BuildingDimension.FloorCount}");
+                Location location = new(locationSO);
+                locationsInWorld.Add(location);
+
+                GameObject locationObject = LocationVisualizer.VisualizeSimplifiedBuilding(locationSO, true, true);
+                locationObject.transform.SetParent(WorldManager.Instance.World.transform);
                 locationObjects.Add(location, locationObject);
             }
         }
 
+        //protected void GenerateLocations() {
+        //    if (locationsToUse == null || locationsToUse.Count == 0) {
+        //        Debug.Log("No locations to generate");
+        //        return;
+        //    }
+        //    Debug.Log("Generating Locations...");
+        //    locationsInWorld = new();
+        //    for (int i = 0; i < Random.Range(minNumberOfLocations, maxNumberOfLocation); i++) {
+        //        LocationSO locationSO = locationsToUse[Random.Range(0, locationsToUse.Count)];
+        //        Debug.Log($"{locationSO.LocationName} {i} {locationSO.BuildingDimension.FloorCount}");
+        //        CreateLocationAndAddToLists(locationSO);
+        //    }
+        //}
 
-        private void CreateLocationFromSO(LocationSO locationSO, Transform world) {
-            GameObject locationObject = new(locationSO.locationName);
-            Location locationComponent = locationObject.AddComponent<Location>();
+        //protected void CreateLocationAndAddToLists(LocationSO locationSO) {
+        //    Location location = new(locationSO);
+        //    locationsInWorld.Add(location);
+        //    locationsToVisualize.Add(location, locationSO);
+        //}
 
-            locationComponent.SetValuesFromSO(locationSO, world);
+        //public void VisualizeLocations() {
+        //    if (locationsInWorld == null || locationsInWorld.Count == 0) {
+        //        Debug.Log("No locations to visualize");
+        //        return;
+        //    }
+        //    Debug.Log("Visualizing Locations...");
+        //    locationObjects = new();
 
-
-
-
-            locationsInWorld.Add(locationComponent);
-        }
-
-        public void AddUsedLocation(LocationSO usedLocation) => usedLocations.Add(usedLocation);
-        internal void SetUsedLocations(List<LocationSO> usedLocations) => this.usedLocations = usedLocations;
+        //    foreach (KeyValuePair<Location, LocationSO> kvp in locationsToVisualize) {
+        //        GameObject locationObject = LocationVisualizer.VisualizeSimplifiedBuilding(kvp.Value, true, true);
+        //        locationObject.transform.SetParent(WorldManager.Instance.World.transform);
+        //        locationObjects.Add(kvp.Key, locationObject);
+        //    }
+        //    locationsToVisualize.Clear();
+        //}
     }
 }

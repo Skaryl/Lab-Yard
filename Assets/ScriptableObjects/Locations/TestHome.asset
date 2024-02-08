@@ -12,19 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2facf3215cd3cf7448097e9f6829a7c4, type: 3}
   m_Name: TestHome
   m_EditorClassIdentifier: 
+  minAmountInWorld: 1
   locationName: Home
+  description: 
   locationType: 0
-  position: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 0, z: 0, w: 0}
   buildingDimension:
+    floorCount: 1
+    basementCount: 1
+    roomsPerFloor: 4
     xDimension: 10
     zDimension: 10
     roomHeight: 3
-    floorCount: 1
-    basementCount: 1
     wallThickness: 0.43
     floorThickness: 0.4
     roofThickness: 0.4
-    roomsPerFloor: 4
-  simpleVisualisationMaterial: {fileID: 2100000, guid: 45b18fe1332bbdf4295a929eefccc564,
-    type: 2}
+  placement:
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
+  colliderBoxMaterial: {fileID: 2100000, guid: 45b18fe1332bbdf4295a929eefccc564, type: 2}

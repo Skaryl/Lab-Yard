@@ -22,6 +22,10 @@ namespace LecureyGames {
             }
             Instance = this;
 
+
+        }
+
+        private void Start() {
             if (LocationManager == null)
                 LocationManager = GameObject.Find("LocationManager").GetComponent<LocationManager>();
             //ValidationHelper.CheckNull(LocationManager);
@@ -34,9 +38,7 @@ namespace LecureyGames {
             World.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
 
             Statistics.MeasureTime(GenerateMap);
-
-            LocationManager.InitializeLocations(this.transform);
-
+            Statistics.MeasureTime(LocationManager.InitializeLocations);
         }
 
         private void GenerateMap() {

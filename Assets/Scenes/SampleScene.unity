@@ -1069,7 +1069,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8e4d81732e7c614ebe7628e303523fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapPlaneVisible: 1
+  mapPlaneVisible: 0
   locationManager: {fileID: 2034461005}
   mapBackground: {fileID: 2100000, guid: 1c093e3da1cdf094eb5c094734074e67, type: 2}
   mapPrefab: {fileID: 5454671891646517353, guid: 828ab53e48b9ea748931329fb2d90cd8,
@@ -1201,15 +1201,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41be2532865dd1a48b9e53322cc6fb9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  usedLocations:
-  - {fileID: 11400000, guid: 6fe7658b7129f944cae5a1ac1aea0211, type: 2}
-  - {fileID: 11400000, guid: 8e1aa7dfebef3ef4bb4879c8c37baad2, type: 2}
-  - {fileID: 11400000, guid: f533c61d538458344bd978ce409378f0, type: 2}
-  - {fileID: 11400000, guid: 1c6ddf68bb19d8c41bd16990817ff994, type: 2}
-  locations: []
-  useRandomLocations: 1
   minNumberOfLocations: 10
   maxNumberOfLocation: 1000
+  locationsToUse:
+  - {fileID: 11400000, guid: 1c6ddf68bb19d8c41bd16990817ff994, type: 2}
+  - {fileID: 11400000, guid: 8e1aa7dfebef3ef4bb4879c8c37baad2, type: 2}
+  - {fileID: 11400000, guid: f533c61d538458344bd978ce409378f0, type: 2}
+  - {fileID: 11400000, guid: 1bbe2a602733171489d3b94e583ff720, type: 2}
+  locationsInWorld: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

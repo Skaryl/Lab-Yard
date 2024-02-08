@@ -12,19 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2facf3215cd3cf7448097e9f6829a7c4, type: 3}
   m_Name: TestHotel
   m_EditorClassIdentifier: 
+  minAmountInWorld: 1
   locationName: ShoppingMall
+  description: 
   locationType: 1
-  position: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 0.38268346, z: 0, w: 0.9238795}
   buildingDimension:
+    floorCount: 14
+    basementCount: 4
+    roomsPerFloor: 40
     xDimension: 30
     zDimension: 20
     roomHeight: 4.78
-    floorCount: 14
-    basementCount: 4
     wallThickness: 0.63
     floorThickness: 0.6
     roofThickness: 0.4
-    roomsPerFloor: 40
-  simpleVisualisationMaterial: {fileID: 2100000, guid: 0326ffa2d810533418e619719b2a1ea3,
-    type: 2}
+  placement:
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
+  colliderBoxMaterial: {fileID: 2100000, guid: 6befba47396b5a4409bf711a7f45d4ff, type: 2}
